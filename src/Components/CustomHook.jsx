@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import UseMerge from "./UseMerge";
 const initState = {
   username: "",
   email: "",
@@ -6,13 +7,14 @@ const initState = {
 };
 const CustomHook = () => {
   const [data, setData] = useState(initState);
-
+  const [wholedata, setWholeData] = useState([]);
   // useEffect(() => {
   //   setData(...data, payload);
   // }, [data]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
+    setWholeData([...wholedata, data]);
+    console.log(wholedata);
   };
   return (
     <>
@@ -44,6 +46,15 @@ const CustomHook = () => {
         <br />
         <input type="submit" />
       </form>
+
+      {/* <UseMerge wholedata={wholedata} /> */}
+      {wholedata.map(function (item) {
+        return (
+          <>
+            <div>{`${item.username} ${item.password} ${item.email}`}</div>
+          </>
+        );
+      })}
     </>
   );
 };
